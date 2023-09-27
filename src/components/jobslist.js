@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Job from "./job";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+import styles from './styles.css';
+
 
 const JobsList = () => {
   const [offers] = useState([
@@ -33,13 +35,17 @@ const JobsList = () => {
     },
   ]);
 
+  const intl = useIntl();
+  const isSpanish = intl.locale === 'es';
+  const headerClass = isSpanish ? 'thead-light': 'thead-dark';
+
   return (
     <div>
       <table className="table">
-        <thead className="thead-dark">
+        <thead className={headerClass} >
           <tr>
             <th scope="col">#</th>
-            <th scope="col"> <FormattedMessage id="Position"/></th>
+            <th scope="col" > <FormattedMessage id="Position"/></th>
             <th scope="col"><FormattedMessage id="Company"/></th>
             <th scope="col"><FormattedMessage id="Salary"/></th>
             <th scope="col"><FormattedMessage id="City"/></th>
